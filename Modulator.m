@@ -1,0 +1,12 @@
+t = [0:1/8000:8191/8000];
+x = sin(2*pi*100*t + 2*pi*100*(t.*t));
+carrier = sin(2*pi*1000*t);
+y = carrier.*x;
+Y = fft(y);
+Ysymmetric = [Y(4097:8192), Y(1:4096)];
+p = length(y);
+fs = 8000;
+symmetricFreqs = [-fs/2:fs/p:(fs/2)-(fs/p)];
+plot(symmetricFreqs, abs(Ysymmetric));
+xlabel('Frequency in Hertz');
+ylabel('Magnitude of DFT');
